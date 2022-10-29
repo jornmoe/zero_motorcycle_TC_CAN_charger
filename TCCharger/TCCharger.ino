@@ -7,7 +7,7 @@
 #include <SimpleTimer.h>
 
 // #define Serial Serial1 // uncomment if you use Thinary Nano every 4808 "USB serial hack"
-#define SPI_CS_PIN 8 //CS Pin 
+#define SPI_CS_PIN 10 //CS Pin 
 
 // Potentiometers should be connected to +5V, anlog pin and GND.
 #define AMP_ADJ 0 //Potentiometer connected to A0 for adjusting charge current
@@ -139,11 +139,12 @@ void setVoltage(int t_voltage) { //can be used to set desired voltage to i.e. 80
 void readVoltAdj() {
 // 99,12 - 116,2 
 
-  ampadj = analogRead(VOLT_ADJ); // Read value from VoltAdj potentiometer connected to A1
+  voltadj = analogRead(VOLT_ADJ); // Read value from VoltAdj potentiometer connected to A1
+  Serial.print("volt: ");
   Serial.println(voltadj);
   // some clever math to have minimum target voltage = 99.1V and max target voltage = MAX_VOLTAGE corresponding to target SOC from aproximatly 35% to 100%. 
   // Note the scale isn't linear so marking the potentiometer should be done by setting a position and take note of SOC when charging stops
-  int voltage = (int) (MAX_VOLTAGE*((voltadj+5934)/6958));
+  int voltage = (int) (MAX_VOLTAGE*((voltadj+5944)/6958));
     
   if(voltage > MAX_VOLTAGE){
 
@@ -177,6 +178,7 @@ void setCurrent(int t_current) { //can be used to reduce or adjust charging spee
 void readAmpAdj() {
 
   ampadj = analogRead(AMP_ADJ); // Read value from AmpAdj potentiometer connected to A0
+  Serial.print("amp: ");
   Serial.println(ampadj);
   int current = (int) (MAX_CURRENT*((ampadj+200)/1120.0)); // some clever math to have minimum charge curret > 0A.
     
@@ -199,6 +201,9 @@ void myTimer1() { // Function called repeatedly by the timer
   Serial.print("Charge current setting: ");
   Serial.print((float)outputcurrent/10.0); // Print the current setting
   Serial.println(" A");
+  Serial.print("Voltage target setting: ");
+  Serial.print((float)outputvoltage/10.0); // Print the current setting
+  Serial.println(" V");
   
   unsigned char voltamp[8] = {highByte(outputvoltage), lowByte(outputvoltage), highByte(outputcurrent), lowByte(outputcurrent), 0x00,0x00,0x00,0x00}; // Prepare new CAN bus message
   Serial.println(canWrite(voltamp, sendId)); // Send message and print the result
@@ -221,12 +226,12 @@ void setup() {
 
   while(CAN_OK != CAN.begin(CAN_250KBPS, MCP_8MHz)){ //CAN Bus initialization
 
-    Serial.println("CAN initialization error, Retrying...");
+    Serial.println("CAN Initialization error, Retrying...");
     delay(200);
 
   }
 
-  Serial.println("CAN Initialisierung erfolgreich");
+  Serial.println("CAN Initialization successful");
 
   timer1.setInterval(950, myTimer1); // Configre the timer function
 
