@@ -7,7 +7,14 @@
 #include <SimpleTimer.h>
 
 // #define Serial Serial1 // uncomment if you use Thinary Nano every 4808 "USB serial hack"
-#define SPI_CS_PIN 10 //CS Pin 
+#define SPI_CS_PIN 10 //CS Pin = 10 when using arduino nano
+//#define SPI_CS_PIN 8 //CS Pin = 8 when using Thinary Nano every 4808
+// Basically, as long as you identify the SPI interface pins and connect the MOSI, MISO and SCK the SPI library
+// should figure out the correct config autmagically for those signals. Only the CS pin and INT pin might have 
+// to be changed depending on which pins are available.
+// Connect INT pin of can bus card to D2 when using Thinary Nano every 4808 or arduino nano. 
+// D2 will probably work for most arduino boards but I have only tested on the two above
+// INT is used for receiving messages from the can bus interface
 
 // Potentiometers should be connected to +5V, anlog pin and GND.
 #define AMP_ADJ 0 //Potentiometer connected to A0 for adjusting charge current

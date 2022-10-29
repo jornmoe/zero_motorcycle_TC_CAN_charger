@@ -1,3 +1,7 @@
+Work in progress... basically translate Lennart-O's code/comments to english and add some features.
+Code tested on "arduino nano" and "ardiuino nano evry"
+
+
 # Benötigte Bibliotheken:
 
 1. Meine CAN-Bus Library hier auf Github
