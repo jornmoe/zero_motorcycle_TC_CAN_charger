@@ -16,7 +16,10 @@
 // D2 will probably work for most arduino boards but I have only tested on the two above
 // INT is used for receiving messages from the can bus interface
 
-// Potentiometers should be connected to +5V, anlog pin and GND.
+// Potentiometers should be connected to +5V, anlog pin and GND. 
+// I have used 20k linear potentiometers but ny linear potentiometer from 10k to 100k will probably work just fine.
+// This is optional and can be ommited. If you don't want this. Look at the "myTimer1()" function
+// and the two code lines that should be commented out if you don't connect potentiometers
 #define AMP_ADJ 0 //Potentiometer connected to A0 for adjusting charge current
 #define VOLT_ADJ 1 //Potentiometer connected to A1 for setting target SOC voltage 
 #define MAX_VOLTAGE 1162 // set max voltage to 116,2V (offset = 0,1)
@@ -28,7 +31,7 @@
 //***********************************************************
 
 word outputcurrent = 0; // initial current when starting up
-word outputvoltage = MAX_VOLTAGE; // set initial voltage to MAX_VOLTAGEV (offset = 0,1)
+word outputvoltage = MAX_VOLTAGE; // set initial voltage to MAX_VOLTAGE (offset = 0,1)
 
 float ampadj = 0;
 float voltadj = MAX_VOLTAGE;
