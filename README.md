@@ -1,5 +1,8 @@
-Work in progress... basically translate Lennart-O's code/comments to english and add some features.
+Basically translate Lennart-O's code/comments to english and added some features.
 Code tested on "arduino nano" and "ardiuino nano evry"
+
+My build instructions with pictures can be found here: https://www.facebook.com/groups/zmcowners/permalink/5450813054987858/
+Pictures has comments with detailed instructions.
 
 
 # Benötigte Bibliotheken:
