@@ -1,5 +1,8 @@
 //Based on Code from Lennart O.
 
+∕∕ More detailed instructions on hardware build can be found here:
+// https://www.facebook.com/groups/zmcowners/permalink/5450813054987858/
+
 //
 //#include <CAN.h>
 #include <mcp_can.h> 
@@ -11,14 +14,13 @@
 // #define SPI_CS_PIN 8 //CS Pin = d8 when using Thinary Nano every 4808
  #define SPI_CS_PIN 15 //CS Pin = d8 when using NODEMCU (esp32) NB! 15 is gpio number but print label says d8
 // Basically, as long as you identify the SPI interface pins and connect the MOSI, MISO and SCK the SPI library
-// should figure out the correct config autmagically for those signals. Only the CS pin and INT pin might have 
+// should figure out the correct config automagically for those signals. Only the CS pin and INT pin might have 
 // to be changed depending on which pins are available.
 // Connect INT pin of can bus card to D2 when using Thinary Nano every 4808 or arduino nano. 
 // D2 will probably work for most arduino boards but I have only tested on the two above
 // INT is used for receiving messages from the can bus interface
 
-// Potentiometers should be connected to +5V, anlog pin and GND.
-// NB! NODEMCU should use 3.3V not 5V for the potentiometer.
+// Potentiometers should be connected to VREF, anlog pin and GND.
 // I have used 20k linear potentiometers but ny linear potentiometer from 10k to 100k will probably work just fine.
 // This is optional and can be ommited. If you don't want this. Look at the "myTimer1()" function
 // and the two code lines that should be commented out if you don't connect potentiometers
